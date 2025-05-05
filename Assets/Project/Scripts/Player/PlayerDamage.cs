@@ -39,7 +39,7 @@ public class PlayerDamage : MonoBehaviour
             // Geri itme işlemi
             Rigidbody2D enemyRb = hit.collider.GetComponent<Rigidbody2D>();
 
-            if (enemyRb != null) {
+            if (enemyRb != null && !hit.collider.CompareTag("Boss")) {
                 // Yönü oyuncudan düşmana doğru ayarla
                 Vector2 direction = (hit.transform.position - transform.position).normalized;
                 Vector2 knockback = new Vector2(direction.x * forceAmount * enemyRb.mass, 0f); // sadece yatay kuvvet

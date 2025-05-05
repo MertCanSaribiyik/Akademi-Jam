@@ -8,17 +8,29 @@ public class GateScene : MonoBehaviour
     [SerializeField] private float delay = 1f;
 
     [SerializeField] private LevelLoader levelLoader;
-
+    [SerializeField] private bool isLastScene = false;
+    [SerializeField] private GameObject lastMessage;
+    
 
     private void Start() {
         speechbubble.SetActive(false);
+
+        if(lastMessage != null) {
+            lastMessage.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player")) {
             if (playerInventory.hasKey) {
                 playerInventory.hasKey = false;
-                levelLoader.LoadNextLevel();
+
+                if (isLastScene) {
+                    lastMessage.SetActive(true);
+                }
+                else {
+                    levelLoader.LoadNextLevel();
+                }
             }
 
             else {

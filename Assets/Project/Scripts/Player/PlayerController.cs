@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         //Jumping :
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumpCount - 1) {
             //rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            AudioManager.Instance.PlayOneShot(SoundEffectType.PlayerJump);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpCount++;
         }

@@ -8,6 +8,7 @@ public class HealthSystem : MonoBehaviour
     private Animator animator;
 
     [SerializeField] private bool isPlayer = true; // Set to true for player, false for enemy
+    [SerializeField] private bool isBoss = false;
 
     [Header("Health Bar")]
     [SerializeField] private Slider healthBar;
@@ -15,6 +16,8 @@ public class HealthSystem : MonoBehaviour
     [Header("Health Settings")]
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth = 100f;
+
+    [SerializeField] private Animator bossAnimator;
 
     [SerializeField] private PlayerInventory playerInventory;
 
@@ -43,6 +46,10 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth <= 0) {
             Die();
         }
+
+        if(isPlayer) {
+            AudioManager.Instance.PlayOneShot(SoundEffectType.PlayerDamage);
+        }
     }
 
     private void Die() {
@@ -56,6 +63,12 @@ public class HealthSystem : MonoBehaviour
             OnPlayerDeath.Invoke();
             StartCoroutine(GameOver());
         }
+        else if(isBoss) {
+            AudioManager.Instance.PlayOneShot(SoundEffectType.BoosDeath);
+            bossAnimator.SetTrigger("death");
+            StartCoroutine(BossDeath());
+        }
+
         else {
             Debug.Log("Enemy has died.");
             Destroy(gameObject);
@@ -85,8 +98,8 @@ public class HealthSystem : MonoBehaviour
         SceneManagement.ReloadScene();
     }
 
-    private IEnumerator EnemyDeath() {
-        yield return new WaitForSeconds(2f);
+    private IEnumerator BossDeath() {
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 }
