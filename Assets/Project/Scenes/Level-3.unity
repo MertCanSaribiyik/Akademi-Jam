@@ -4969,11 +4969,11 @@ PrefabInstance:
       objectReference: {fileID: 2037448324}
     - target: {fileID: 3548184478459880611, guid: 4c22c8e6cf89a2649be9334fa67c914b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.96900463
+      value: -0.96420574
       objectReference: {fileID: 0}
     - target: {fileID: 3548184478459880611, guid: 4c22c8e6cf89a2649be9334fa67c914b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.869306
+      value: 3.0327108
       objectReference: {fileID: 0}
     - target: {fileID: 4367045671039710713, guid: 4c22c8e6cf89a2649be9334fa67c914b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5017,11 +5017,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5733029680482465780, guid: 4c22c8e6cf89a2649be9334fa67c914b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.41
+      value: -7.58
       objectReference: {fileID: 0}
     - target: {fileID: 5733029680482465780, guid: 4c22c8e6cf89a2649be9334fa67c914b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9
+      value: 3.06
       objectReference: {fileID: 0}
     - target: {fileID: 6758126369742056138, guid: 4c22c8e6cf89a2649be9334fa67c914b, type: 3}
       propertyPath: m_Name
@@ -6064,11 +6064,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6736902313933772265, guid: 68a35518abee34d49b1aa169c1ae77da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.41
+      value: -7.58
       objectReference: {fileID: 0}
     - target: {fileID: 6736902313933772265, guid: 68a35518abee34d49b1aa169c1ae77da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9
+      value: 3.06
       objectReference: {fileID: 0}
     - target: {fileID: 6736902313933772265, guid: 68a35518abee34d49b1aa169c1ae77da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46453,7 +46453,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 500
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -46483,7 +46483,7 @@ MonoBehaviour:
   isPlayer: 0
   isBoss: 1
   healthBar: {fileID: 1436664929}
-  maxHealth: 500
+  maxHealth: 300
   bossAnimator: {fileID: 1919805397}
   playerInventory: {fileID: 11400000, guid: f66e26a9929f7dd499a3b9048e0e789d, type: 2}
 --- !u!95 &1919805397 stripped

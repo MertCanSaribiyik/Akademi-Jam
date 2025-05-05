@@ -24,6 +24,7 @@ public class HealthSystem : MonoBehaviour
     //events : 
     public static event Action OnPlayerDeath = delegate { };
     public static event Action OnEnemyDeath = delegate { };
+    public static event Action OnBossDeath = delegate { };
 
     //Getters :
     public float MaxHealth { get { return maxHealth; } }
@@ -66,6 +67,7 @@ public class HealthSystem : MonoBehaviour
         else if(isBoss) {
             AudioManager.Instance.PlayOneShot(SoundEffectType.BoosDeath);
             bossAnimator.SetTrigger("death");
+            OnBossDeath.Invoke();
             StartCoroutine(BossDeath());
         }
 

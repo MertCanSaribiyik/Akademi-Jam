@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class GateScene : MonoBehaviour
 {
@@ -15,12 +16,24 @@ public class GateScene : MonoBehaviour
     [SerializeField] private GameObject bossHealthBar;
     [SerializeField] private AudioClip finishMusic;
 
+    private bool isBossDeath = false;
+
     private void Start() {
         speechbubble.SetActive(false);
 
         if(lastMessage != null) {
             lastMessage.SetActive(false);
         }
+
+        HealthSystem.OnBossDeath += HealthSystem_OnBossDeath;
+    }
+
+    private void OnDestroy() {
+        HealthSystem.OnBossDeath -= HealthSystem_OnBossDeath;
+    }
+
+    private void HealthSystem_OnBossDeath() {
+        isBossDeath = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -29,11 +42,14 @@ public class GateScene : MonoBehaviour
                 playerInventory.hasKey = false;
 
                 if (isLastScene) {
-                    lastMessage.SetActive(true);
-                    AudioManager.Instance.PlayMusic(finishMusic);
-                    playerHealthBar.SetActive(false);
-                    bossHealthBar.SetActive(false);
+                    if(isBossDeath) {
+                        lastMessage.SetActive(true);
+                        AudioManager.Instance.PlayMusic(finishMusic);
+                        playerHealthBar.SetActive(false);
+                        bossHealthBar.SetActive(false);
+                    }
                 }
+                    
 
                 else {
                     levelLoader.LoadNextLevel();
