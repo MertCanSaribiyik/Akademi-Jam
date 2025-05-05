@@ -16,9 +16,14 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth = 100f;
 
+    [SerializeField] private PlayerInventory playerInventory;
+
     //events : 
     public static event Action OnPlayerDeath = delegate { };
     public static event Action OnEnemyDeath = delegate { };
+
+    //Getters :
+    public float MaxHealth { get { return maxHealth; } }
 
     private void Awake() {
         animator = GetComponent<Animator>();
@@ -43,15 +48,17 @@ public class HealthSystem : MonoBehaviour
     private void Die() {
         if(isPlayer) {
             animator.SetTrigger("death");
+            playerInventory.hasKey = false;
 
             GetComponent<PlayerController>().enabled = false;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
             OnPlayerDeath.Invoke();
             StartCoroutine(GameOver());
         }
         else {
             Debug.Log("Enemy has died.");
-            gameObject.SetActive(false);
+            Destroy(gameObject);
             OnEnemyDeath.Invoke();
         }
     }
@@ -76,5 +83,10 @@ public class HealthSystem : MonoBehaviour
     public IEnumerator GameOver() {
         yield return new WaitForSeconds(2f);
         SceneManagement.ReloadScene();
+    }
+
+    private IEnumerator EnemyDeath() {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }

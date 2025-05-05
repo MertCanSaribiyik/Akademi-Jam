@@ -6,4 +6,9 @@ public static class SceneManagement
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public static void NextScene() {
+        // Load the next scene in the build settings
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }
