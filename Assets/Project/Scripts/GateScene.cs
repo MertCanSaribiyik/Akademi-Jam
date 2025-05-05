@@ -10,7 +10,10 @@ public class GateScene : MonoBehaviour
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private bool isLastScene = false;
     [SerializeField] private GameObject lastMessage;
-    
+
+    [SerializeField] private GameObject playerHealthBar;
+    [SerializeField] private GameObject bossHealthBar;
+    [SerializeField] private AudioClip finishMusic;
 
     private void Start() {
         speechbubble.SetActive(false);
@@ -27,7 +30,11 @@ public class GateScene : MonoBehaviour
 
                 if (isLastScene) {
                     lastMessage.SetActive(true);
+                    AudioManager.Instance.PlayMusic(finishMusic);
+                    playerHealthBar.SetActive(false);
+                    bossHealthBar.SetActive(false);
                 }
+
                 else {
                     levelLoader.LoadNextLevel();
                 }

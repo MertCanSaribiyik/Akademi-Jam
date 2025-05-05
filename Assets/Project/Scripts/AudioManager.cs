@@ -9,11 +9,18 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource soundEffectSource;
     [SerializeField] private List<MyDictionary<SoundEffectType, AudioClip>> soundEffectList;
 
+    [SerializeField] private AudioSource musicEffectSource;
+
     private void Awake() {
         if (Instance != null && Instance != this)
             Destroy(this);
         else
             Instance = this;
+    }
+
+    public void PlayMusic(AudioClip audioClip) {
+        musicEffectSource.clip = audioClip;
+        musicEffectSource.Play();
     }
 
     public void PlayOneShot(SoundEffectType soundEffectType) {
@@ -22,7 +29,7 @@ public class AudioManager : MonoBehaviour
         soundEffectSource.PlayOneShot(clip);
     }
 
-    public AudioClip GetClipByType(SoundEffectType soundEffectType) {
+    private AudioClip GetClipByType(SoundEffectType soundEffectType) {
         foreach (MyDictionary<SoundEffectType, AudioClip> list in soundEffectList) {
             if (list.key == soundEffectType) {
                 return list.value;
@@ -40,7 +47,8 @@ public enum SoundEffectType
     BoosDeath,
     Collectible,
     Button,
-    PlayerDamage
+    PlayerDamage,
+    FinishMusic
 }
 
 [Serializable]
